@@ -4,7 +4,7 @@ import { resolve, join } from 'path'
 import packagejson from './package.json'
 
 module.exports = env => ({
-  entry: join(__dirname, 'src', 'index.js'),
+  entry: ['react-hot-loader/patch', join(__dirname, 'src', 'index.js')],
   output: {
     filename: 'index.js',
     path: join(__dirname, 'app')

@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root'
 import React, { PureComponent } from 'react'
 import * as uikit from './ui-web/src'
 import components from './ui'
@@ -49,7 +50,7 @@ const buttonState = {
   id: 'mybutton',
   visibility: true,
   title: 'Button',
-  kind: 'icon', //text, outlined, contained, icon, custom
+  kind: 'outlined', //text, outlined, contained, icon, custom
   loading: false,
   readonly: false,
   icon: 'home',
@@ -109,8 +110,10 @@ const renderNode = viewState => {
   return <Node viewState={state} />
 }
 
-export default class App extends PureComponent {
-  render() {
-    return <WebRoot theme={theme}>{renderNode(buttonState)}</WebRoot>
+export default hot(
+  class App extends PureComponent {
+    render() {
+      return <WebRoot theme={theme}>{renderNode(buttonState)}</WebRoot>
+    }
   }
-}
+)

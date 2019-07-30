@@ -201,7 +201,19 @@ const StyledButton = withTheme(
 )
 
 const Button = React.memo(
-  ({ id, title, onPress, kind, disabled, style, activeStyle = {}, disabledStyle = {}, icon, stopPropagation }) => {
+  ({
+    id,
+    title,
+    onPress,
+    kind,
+    loading,
+    disabled,
+    style,
+    activeStyle = {},
+    disabledStyle = {},
+    icon,
+    stopPropagation
+  }) => {
     // const iconClassName = (icon && `mdi mdi-${icon.replace('_', '-')}`) || ''
 
     const onClick = clickImpl(onPress, stopPropagation)
@@ -222,7 +234,7 @@ const Button = React.memo(
     //   label: [{ color: disabledLabelColor }]
     // } = disabledStyle
 
-    const size = height ? height - 8 : 24
+    const size = height ? height - 8 : 16
 
     const backgroundColor = (() => {
       // только для custom
@@ -250,7 +262,8 @@ const Button = React.memo(
           disabled={disabled}
           variant={kind}
         >
-          {!!icon && <Icon>{icon}</Icon>}
+          {!!icon && loading !== true && <Icon>{icon}</Icon>}
+          {!!loading && <CircularProgress size={size} style={{ marginRight: 2 }} />}
           {title}
         </StyledButton>
       )
