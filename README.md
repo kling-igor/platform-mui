@@ -34,3 +34,5 @@ https://material-ui.com/styles/advanced/#insertionpoint
 https://material-ui.com/styles/advanced/#with-material-ui-core
 
 https://medium.com/sipios/use-styled-components-with-material-ui-react-e0759f9a15ce
+
+https://github.com/gaearon/react-hot-loader/issues/1227

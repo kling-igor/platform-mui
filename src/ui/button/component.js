@@ -12,7 +12,8 @@ export default Component => ({ viewState }) => {
     kind,
     loading,
     readonly,
-    icon
+    icon,
+    onPress
   } = viewState
 
   if (!visibility || !mergedStyle) return null
@@ -28,6 +29,7 @@ export default Component => ({ viewState }) => {
       loading={loading}
       disabled={readonly}
       icon={icon}
+      // onPress={onPress} // нет нужды передавать обработчик
     />
   )
 }

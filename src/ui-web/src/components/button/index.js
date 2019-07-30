@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react'
+import React, { memo } from 'react'
 import MaterialButton from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
 import IconButton from '@material-ui/core/IconButton'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { styled, withTheme } from '@material-ui/styles'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
+import CustomButton from './custom'
 
 const STYLES = {
   // p0: { padding: 0, margin: 0 },
@@ -200,7 +201,7 @@ const StyledButton = withTheme(
   ))
 )
 
-const Button = React.memo(
+const Button = memo(
   ({
     id,
     title,
@@ -216,7 +217,7 @@ const Button = React.memo(
   }) => {
     // const iconClassName = (icon && `mdi mdi-${icon.replace('_', '-')}`) || ''
 
-    const onClick = clickImpl(onPress, stopPropagation)
+    const onClick = disabled ? null : clickImpl(onPress, stopPropagation)
 
     const {
       self: [{ width, height, backgroundColor: normalBackgroundColor, ...rest }] = [{}],
@@ -278,9 +279,18 @@ const Button = React.memo(
     }
 
     return (
-      <button type="button" onClick={onClick} disabled={disabled}>
-        {title}
-      </button>
+      <CustomButton
+        title={title}
+        icon={icon}
+        onClick={onClick}
+        disabled={disabled}
+        style={style}
+        activeStyle={activeStyle}
+        disabledStyle={disabledStyle}
+      />
+      // <button type="button" onClick={onClick} disabled={disabled}>
+      //   {title}
+      // </button>
     )
   }
 )

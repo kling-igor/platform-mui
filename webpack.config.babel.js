@@ -23,6 +23,7 @@ module.exports = env => ({
   devtool: env.dev ? 'source-map' : false,
 
   resolve: {
+    alias: { 'react-dom': '@hot-loader/react-dom' },
     modules: [join(__dirname, '.'), join(__dirname, 'src')]
   },
 

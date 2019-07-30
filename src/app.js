@@ -50,10 +50,13 @@ const buttonState = {
   id: 'mybutton',
   visibility: true,
   title: 'Button',
-  kind: 'outlined', //text, outlined, contained, icon, custom
+  kind: 'custom', //text, outlined, contained, icon, custom
   loading: false,
   readonly: false,
   icon: 'home',
+  onPress: () => {
+    console.log('PRESS')
+  },
   styles: [
     {
       self: [
@@ -73,7 +76,7 @@ const buttonState = {
     {
       self: [
         {
-          // backgroundColor: '#ff0'
+          backgroundColor: '#ff0'
         }
       ],
       label: [{}]
