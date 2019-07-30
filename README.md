@@ -20,3 +20,17 @@ https://material-ui.com/guides/api/
 
 Default theme
 https://material-ui.com/customization/default-theme/
+
+Supported Components
+https://material-ui.com/getting-started/supported-components/
+
+CSS injection order
+https://material-ui.com/styles/advanced/#css-injection-order
+
+CSS insertion point
+https://material-ui.com/styles/advanced/#insertionpoint
+
+!!!
+https://material-ui.com/styles/advanced/#with-material-ui-core
+
+https://medium.com/sipios/use-styled-components-with-material-ui-react-e0759f9a15ce

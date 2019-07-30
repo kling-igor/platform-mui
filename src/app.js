@@ -31,16 +31,6 @@ function usePlugin(plugin) {
   })
 }
 
-function use(plugin) {
-  if (Array.isArray(plugin)) {
-    plugin.forEach(usePlugin)
-  } else {
-    usePlugin(plugin)
-  }
-}
-
-use(Object.values(uikit))
-
 function useWidget(widget) {
   Object.defineProperty(widgets, widget.name, {
     enumerable: true,
@@ -49,7 +39,8 @@ function useWidget(widget) {
   })
 }
 
-Object.values(components).forEach(widget => useWidget(widget))
+Object.values(uikit).forEach(usePlugin)
+Object.values(components).forEach(useWidget)
 
 const WebRoot = views.root
 
@@ -62,9 +53,41 @@ const buttonState = {
   loading: false,
   readonly: false,
   icon: undefined,
-  styles: [{ self: [{}], label: [{}] }],
-  activeStyles: [{ self: [{}], label: [{}] }],
-  disabledStyles: [{ self: [{}], label: [{}] }]
+  styles: [
+    {
+      self: [
+        {
+          // width: 400,
+          // backgroundColor: '#00f'
+        }
+      ],
+      label: [
+        {
+          // color: '#fff'
+        }
+      ]
+    }
+  ],
+  activeStyles: [
+    {
+      self: [
+        {
+          // backgroundColor: '#ff0'
+        }
+      ],
+      label: [{}]
+    }
+  ],
+  disabledStyles: [
+    {
+      self: [
+        {
+          // backgroundColor: '#f00'
+        }
+      ],
+      label: [{}]
+    }
+  ]
 }
 
 const renderNode = viewState => {
