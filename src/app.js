@@ -49,10 +49,10 @@ const buttonState = {
   id: 'mybutton',
   visibility: true,
   title: 'Button',
-  kind: 'contained', //text, outlined, contained, custom
+  kind: 'icon', //text, outlined, contained, icon, custom
   loading: false,
   readonly: false,
-  icon: undefined,
+  icon: 'home',
   styles: [
     {
       self: [
@@ -63,7 +63,7 @@ const buttonState = {
       ],
       label: [
         {
-          // color: '#fff'
+          color: '#f00'
         }
       ]
     }

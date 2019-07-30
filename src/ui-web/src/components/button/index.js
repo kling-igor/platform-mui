@@ -6,17 +6,17 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { styled, withTheme } from '@material-ui/styles'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 
-// const STYLES = {
-//   p0: { padding: 0, margin: 0 },
-//   center: { display: 'flex', alignItems: 'center' },
-//   label: {
-//     color: 'inherit',
-//     whiteSpace: 'wrap',
-//     marginLeft: '4px',
-//     marginRight: '4px',
-//     verticalAlign: 'middle'
-//   }
-// }
+const STYLES = {
+  // p0: { padding: 0, margin: 0 },
+  // center: { display: 'flex', alignItems: 'center' }
+  // label: {
+  //   color: 'inherit',
+  //   whiteSpace: 'wrap',
+  //   marginLeft: '4px',
+  //   marginRight: '4px',
+  //   verticalAlign: 'middle'
+  // }
+}
 
 const clickImpl = (click, stopPropagation = false) => event => {
   if (stopPropagation) {
@@ -145,88 +145,132 @@ const clickImpl = (click, stopPropagation = false) => event => {
 // })
 
 const StyledButton = withTheme(
-  withStyles(
-    {
-      root: {
-        backgroundColor: ({ backgroundColor }) => backgroundColor,
-        width: ({ width }) => width,
-        height: ({ height }) => height
-        // это только для custom
-        // '&:hover': {
-        //   backgroundColor: ({ activeBackgroundColor }) => activeBackgroundColor,
-        //   color: ({ theme, activeBackgroundColor }) => theme.palette.getContrastText(activeBackgroundColor)
-        // }
-      },
-      // label: {
-      //   color: ({ theme, backgroundColor }) => theme.palette.getContrastText(backgroundColor),
-      //   // color: ({ labelColor }) => labelColor,
-      //   '&:hover': {
-      //     // color: ({ theme }) => theme.palette.getContrastText('#ff0')
-      //     // color: ({ activeLabelColor }) => activeLabelColor
-      //     color: ({ theme, activeBackgroundColor }) => theme.palette.getContrastText(activeBackgroundColor)
-      //   }
+  withStyles({
+    // Styles applied to the root element
+    root: {
+      // backgroundColor: ({ backgroundColor }) => backgroundColor,
+      width: ({ width }) => width,
+      height: ({ height }) => height,
+      // это только для custom
+      // '&:hover': {
+      //   backgroundColor: ({ activeBackgroundColor }) => activeBackgroundColor,
+      //   color: ({ theme, activeBackgroundColor }) => theme.palette.getContrastText(activeBackgroundColor)
       // }
-      label: {
-        color: ({ theme, backgroundColor }) => theme.palette.getContrastText(backgroundColor),
-        '&:hover': {
-          color: '#ff0'
+      '&:disabled': {
+        backgroundColor: ({ variant }) => {
+          console.log('variant:', variant)
+          return variant === 'contained' ? 'green' : null
         }
-
-        // textTransform: 'lowercase'
       }
     },
-    { withTheme: true }
-  )(({ classes, width, height, backgroundColor, labelColor, ...other }) => (
+    // label: {
+    //   color: ({ theme, backgroundColor }) => theme.palette.getContrastText(backgroundColor),
+    //   // color: ({ labelColor }) => labelColor,
+    //   '&:hover': {
+    //     // color: ({ theme }) => theme.palette.getContrastText('#ff0')
+    //     // color: ({ activeLabelColor }) => activeLabelColor
+    //     color: ({ theme, activeBackgroundColor }) => theme.palette.getContrastText(activeBackgroundColor)
+    //   }
+    // }
+
+    // Styles applied to the span element that wraps the children
+    label: {
+      // color: ({ theme, backgroundColor }) => theme.palette.getContrastText(backgroundColor)
+      // '&:hover': {
+      //   color: '#ff0'
+      // }
+      // textTransform: 'lowercase'
+    },
+
+    //Styles applied to the root element if variant="text"
+    text: {
+      color: ({ theme, labelColor }) => labelColor
+    },
+
+    // Styles applied to the root element if variant="outlined"
+    outlined: {},
+
+    // Styles applied to the root element if variant="contained"
+    contained: {},
+
+    // seudo-class applied to the root element if disabled={true}
+    disabled: {}
+  })(({ classes, theme, width, height, backgroundColor, labelColor, ...other }) => (
     <MaterialButton classes={classes} {...other} />
   ))
 )
 
-const Button = React.memo(({ title, onPress, disabled, style, activeStyle = {}, disabledStyle = {} }) => {
-  const {
-    self: [{ width, height, backgroundColor: normalBackgroundColor, ...rest }] = [{}],
-    label: [{ color: normalLabelColor }] = [{}]
-  } = style
+const Button = React.memo(
+  ({ id, title, onPress, kind, disabled, style, activeStyle = {}, disabledStyle = {}, icon, stopPropagation }) => {
+    // const iconClassName = (icon && `mdi mdi-${icon.replace('_', '-')}`) || ''
 
-  // только для custom
-  const {
-    self: [{ backgroundColor: activeBackgroundColor }] = [{}],
-    label: [{ color: activeLabelColor }] = [{}]
-  } = activeStyle
+    const onClick = clickImpl(onPress, stopPropagation)
 
-  const {
-    self: [{ backgroundColor: disabledBackgroundColor }],
-    label: [{ color: disabledLabelColor }]
-  } = disabledStyle
+    const {
+      self: [{ width, height, backgroundColor: normalBackgroundColor, ...rest }] = [{}],
+      label: [{ color: normalLabelColor }] = [{}]
+    } = style
 
-  const size = height ? height - 8 : 24
-
-  const backgroundColor = (() => {
     // только для custom
-    // if (disabled && disabledBackgroundColor) return disabledBackgroundColor
+    // const {
+    //   self: [{ backgroundColor: activeBackgroundColor }] = [{}],
+    //   label: [{ color: activeLabelColor }] = [{}]
+    // } = activeStyle
 
-    return normalBackgroundColor
-  })()
+    // const {
+    //   self: [{ backgroundColor: disabledBackgroundColor }],
+    //   label: [{ color: disabledLabelColor }]
+    // } = disabledStyle
 
-  const labelColor = (() => {
-    // только для custom
-    // if (disabled && disabledLabelColor) return disabledLabelColor
+    const size = height ? height - 8 : 24
 
-    return normalLabelColor
-  })()
+    const backgroundColor = (() => {
+      // только для custom
+      // if (disabled && disabledBackgroundColor) return disabledBackgroundColor
 
-  return (
-    <StyledButton
-      width={width}
-      height={height}
-      backgroundColor={backgroundColor}
-      labelColor={labelColor}
-      onClick={clickImpl(onPress)}
-      disabled={disabled}
-    >
-      {title}
-    </StyledButton>
-  )
-})
+      return normalBackgroundColor
+    })()
+
+    const labelColor = (() => {
+      // только для custom
+      // if (disabled && disabledLabelColor) return disabledLabelColor
+
+      return normalLabelColor
+    })()
+
+    if (kind === 'text' || kind === 'contained' || kind === 'outlined') {
+      return (
+        <StyledButton
+          id={id}
+          width={width}
+          height={height}
+          backgroundColor={backgroundColor}
+          labelColor={labelColor}
+          onClick={onClick}
+          disabled={disabled}
+          variant={kind}
+        >
+          {!!icon && <Icon>{icon}</Icon>}
+          {title}
+        </StyledButton>
+      )
+    }
+
+    if (kind === 'icon' && icon) {
+      return (
+        <IconButton id={id} onClick={onClick} disabled={disabled}>
+          <Icon>{icon}</Icon>
+        </IconButton>
+      )
+    }
+
+    return (
+      <button type="button" onClick={onClick} disabled={disabled}>
+        {title}
+      </button>
+    )
+  }
+)
 
 export default {
   type: 'view',

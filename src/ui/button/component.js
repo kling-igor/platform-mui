@@ -12,12 +12,10 @@ export default Component => ({ viewState }) => {
     kind,
     loading,
     readonly,
-    icon: iconName
+    icon
   } = viewState
 
   if (!visibility || !mergedStyle) return null
-
-  const icon = iconName ? icon : undefined
 
   return (
     <Component
