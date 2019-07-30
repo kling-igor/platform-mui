@@ -149,7 +149,6 @@ const StyledButton = withTheme(
     {
       root: {
         backgroundColor: ({ backgroundColor }) => backgroundColor,
-        color: ({ theme, backgroundColor }) => theme.palette.getContrastText(backgroundColor),
         width: ({ width }) => width,
         height: ({ height }) => height
         // это только для custom
@@ -157,7 +156,7 @@ const StyledButton = withTheme(
         //   backgroundColor: ({ activeBackgroundColor }) => activeBackgroundColor,
         //   color: ({ theme, activeBackgroundColor }) => theme.palette.getContrastText(activeBackgroundColor)
         // }
-      }
+      },
       // label: {
       //   color: ({ theme, backgroundColor }) => theme.palette.getContrastText(backgroundColor),
       //   // color: ({ labelColor }) => labelColor,
@@ -167,10 +166,18 @@ const StyledButton = withTheme(
       //     color: ({ theme, activeBackgroundColor }) => theme.palette.getContrastText(activeBackgroundColor)
       //   }
       // }
+      label: {
+        color: ({ theme, backgroundColor }) => theme.palette.getContrastText(backgroundColor),
+        '&:hover': {
+          color: '#ff0'
+        }
+
+        // textTransform: 'lowercase'
+      }
     },
     { withTheme: true }
   )(({ classes, width, height, backgroundColor, labelColor, ...other }) => (
-    <MaterialButton className={classes.root} {...other} />
+    <MaterialButton classes={classes} {...other} />
   ))
 )
 
