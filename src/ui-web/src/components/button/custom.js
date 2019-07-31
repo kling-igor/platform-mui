@@ -1,27 +1,29 @@
 import React, { memo, useState } from 'react'
 import Icon from '@material-ui/core/Icon'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import { styled, withTheme } from '@material-ui/styles'
-import { makeStyles, withStyles } from '@material-ui/core/styles'
+import CircularProgress from './circular-progress'
 
 const styles = {
   button: {
-    minWidth: 24,
+    minWidth: 36,
     minHeigh: 24,
-    height: 32,
+    height: 36,
     borderStyle: 'solid',
-    display: 'inline-block'
+    display: 'inline-block',
+    paddingLeft: '16px',
+    paddingRight: '16px',
+    boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12)'
   },
+
   label: {
     fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+    fontWeight: '500',
+    fontSize: '0.875rem',
+    lineHeight: 1.75,
     height: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    letterSpacing: 1,
-
-    marginLeft: 8,
-    marginRight: 8,
+    letterSpacing: '0.02875em',
     WebkitUserSelect: 'none',
     KhtmlUserSelect: 'none',
     MozUserSelect: '-moz-none',
@@ -30,17 +32,6 @@ const styles = {
     userSelect: 'none'
   }
 }
-
-const StyledCircularProgress = withTheme(
-  withStyles({
-    root: {
-      marginRight: '4px'
-    },
-    circle: {
-      color: ({ color }) => color
-    }
-  })(({ classes, color, ...other }) => <CircularProgress classes={classes} {...other} />)
-)
 
 const parseButtonStyle = ({ hovered, disabled, style, activeStyle, disabledStyle }) => {
   if (disabled) {
@@ -75,7 +66,7 @@ const CustomButton = memo(({ id, loading, icon, title, disabled, onClick, style,
 
   const buttonStyle = parseButtonStyle({ hovered, disabled, style, activeStyle, disabledStyle })
   const titleStyle = parseTitleStyle({ hovered, disabled, style, activeStyle, disabledStyle })
-  const { color } = titleStyle
+  const { color, textTransform = 'uppercase' } = titleStyle
 
   const { self: [{ height }] = [{}] } = style
 
@@ -89,9 +80,9 @@ const CustomButton = memo(({ id, loading, icon, title, disabled, onClick, style,
       onMouseLeave={onLeave}
       onClick={onClick}
     >
-      <span style={{ ...styles.label, color }}>
+      <span style={{ ...styles.label, color, textTransform }}>
         {!!icon && loading !== true && <Icon>{icon}</Icon>}
-        {!!loading && <StyledCircularProgress size={size} color={color} />}
+        {!!loading && <CircularProgress size={size} color={color} />}
         {title}
       </span>
     </div>

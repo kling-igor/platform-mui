@@ -50,9 +50,9 @@ const buttonState = {
   id: 'mybutton',
   visibility: true,
   title: 'Home',
-  kind: 'outlined', //text, outlined, contained, icon, custom
+  kind: 'icon', //text, outlined, contained, icon, custom
   loading: false,
-  readonly: false,
+  readonly: true,
   icon: 'home',
   onPress: () => {
     console.log('PRESS')
@@ -61,15 +61,16 @@ const buttonState = {
     {
       self: [
         {
-          // width: 400,
           backgroundColor: '#00f',
-          borderRadius: 2,
+          borderWidth: '3px',
+          borderRadius: 4,
           borderWidth: 0
         }
       ],
       label: [
         {
-          color: '#F00'
+          color: '#f00',
+          textTransform: 'uppercase' // none, capitalize, lowercase, uppercase
         }
       ]
     }
