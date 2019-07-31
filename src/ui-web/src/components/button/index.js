@@ -185,7 +185,7 @@ const StyledButton = withTheme(
 
     //Styles applied to the root element if variant="text"
     text: {
-      color: ({ theme, labelColor }) => labelColor
+      color: ({ theme, color }) => color
     },
 
     // Styles applied to the root element if variant="outlined"
@@ -196,7 +196,7 @@ const StyledButton = withTheme(
 
     // seudo-class applied to the root element if disabled={true}
     disabled: {}
-  })(({ classes, theme, width, height, backgroundColor, labelColor, ...other }) => (
+  })(({ classes, theme, width, height, backgroundColor, color, ...other }) => (
     <MaterialButton classes={classes} {...other} />
   ))
 )
@@ -219,10 +219,7 @@ const Button = memo(
 
     const onClick = disabled ? null : clickImpl(onPress, stopPropagation)
 
-    const {
-      self: [{ width, height, backgroundColor: normalBackgroundColor, ...rest }] = [{}],
-      label: [{ color: normalLabelColor }] = [{}]
-    } = style
+    const { self: [{ width, height, backgroundColor, ...rest }] = [{}], label: [{ color }] = [{}] } = style
 
     // только для custom
     // const {
@@ -237,19 +234,19 @@ const Button = memo(
 
     const size = height ? height - 8 : 16
 
-    const backgroundColor = (() => {
-      // только для custom
-      // if (disabled && disabledBackgroundColor) return disabledBackgroundColor
+    // const backgroundColor = (() => {
+    //   // только для custom
+    //   // if (disabled && disabledBackgroundColor) return disabledBackgroundColor
 
-      return normalBackgroundColor
-    })()
+    //   return normalBackgroundColor
+    // })()
 
-    const labelColor = (() => {
-      // только для custom
-      // if (disabled && disabledLabelColor) return disabledLabelColor
+    // const labelColor = (() => {
+    //   // только для custom
+    //   // if (disabled && disabledLabelColor) return disabledLabelColor
 
-      return normalLabelColor
-    })()
+    //   return normalLabelColor
+    // })()
 
     if (kind === 'text' || kind === 'contained' || kind === 'outlined') {
       return (
@@ -258,7 +255,7 @@ const Button = memo(
           width={width}
           height={height}
           backgroundColor={backgroundColor}
-          labelColor={labelColor}
+          color={color}
           onClick={onClick}
           disabled={disabled}
           variant={kind}
@@ -282,6 +279,7 @@ const Button = memo(
       <CustomButton
         title={title}
         icon={icon}
+        loading={loading}
         onClick={onClick}
         disabled={disabled}
         style={style}

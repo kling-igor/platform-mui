@@ -49,8 +49,8 @@ const buttonState = {
   type: 'button',
   id: 'mybutton',
   visibility: true,
-  title: 'Button',
-  kind: 'custom', //text, outlined, contained, icon, custom
+  title: 'Home',
+  kind: 'outlined', //text, outlined, contained, icon, custom
   loading: false,
   readonly: false,
   icon: 'home',
@@ -62,12 +62,14 @@ const buttonState = {
       self: [
         {
           // width: 400,
-          // backgroundColor: '#00f'
+          backgroundColor: '#00f',
+          borderRadius: 2,
+          borderWidth: 0
         }
       ],
       label: [
         {
-          color: '#f00'
+          color: '#F00'
         }
       ]
     }
@@ -76,20 +78,32 @@ const buttonState = {
     {
       self: [
         {
-          backgroundColor: '#ff0'
+          backgroundColor: '#ff0',
+          borderRadius: 2,
+          borderWidth: 0
         }
       ],
-      label: [{}]
+      label: [
+        {
+          color: 'rgba(0,0,0,0.6)'
+        }
+      ]
     }
   ],
   disabledStyles: [
     {
       self: [
         {
-          // backgroundColor: '#f00'
+          backgroundColor: 'lightgray',
+          borderRadius: 2,
+          borderWidth: 0
         }
       ],
-      label: [{}]
+      label: [
+        {
+          color: 'white'
+        }
+      ]
     }
   ]
 }

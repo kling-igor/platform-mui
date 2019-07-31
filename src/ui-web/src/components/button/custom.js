@@ -1,31 +1,46 @@
 import React, { memo, useState } from 'react'
 import Icon from '@material-ui/core/Icon'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import { styled, withTheme } from '@material-ui/styles'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
 
 const styles = {
   button: {
-    minWidth: 64,
+    minWidth: 24,
+    minHeigh: 24,
+    height: 32,
     borderStyle: 'solid',
     display: 'inline-block'
   },
-  content: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  icon: {
-    width: 16,
-    marginLeft: 12,
-    marginRight: -4
-  },
   label: {
-    textAlign: 'center',
+    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     letterSpacing: 1,
-    marginLeft: 9,
-    marginRight: 9,
-    verticalAlign: 'middle'
+
+    marginLeft: 8,
+    marginRight: 8,
+    WebkitUserSelect: 'none',
+    KhtmlUserSelect: 'none',
+    MozUserSelect: '-moz-none',
+    msUserSelect: 'none',
+    OUserSelect: 'none',
+    userSelect: 'none'
   }
 }
+
+const StyledCircularProgress = withTheme(
+  withStyles({
+    root: {
+      marginRight: '4px'
+    },
+    circle: {
+      color: ({ color }) => color
+    }
+  })(({ classes, color, ...other }) => <CircularProgress classes={classes} {...other} />)
+)
 
 const parseButtonStyle = ({ hovered, disabled, style, activeStyle, disabledStyle }) => {
   if (disabled) {
@@ -62,6 +77,10 @@ const CustomButton = memo(({ id, loading, icon, title, disabled, onClick, style,
   const titleStyle = parseTitleStyle({ hovered, disabled, style, activeStyle, disabledStyle })
   const { color } = titleStyle
 
+  const { self: [{ height }] = [{}] } = style
+
+  const size = height ? height - 8 : 16
+
   return (
     <div
       id={id}
@@ -70,7 +89,11 @@ const CustomButton = memo(({ id, loading, icon, title, disabled, onClick, style,
       onMouseLeave={onLeave}
       onClick={onClick}
     >
-      <span style={styles.label}>{title}</span>
+      <span style={{ ...styles.label, color }}>
+        {!!icon && loading !== true && <Icon>{icon}</Icon>}
+        {!!loading && <StyledCircularProgress size={size} color={color} />}
+        {title}
+      </span>
     </div>
   )
 })
