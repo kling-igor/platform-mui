@@ -11,7 +11,7 @@ const StyledCircularProgress = withTheme(
     circle: {
       color: ({ color }) => color
     }
-  })(({ classes, color, ...other }) => <CircularProgress classes={classes} color="inherited" {...other} />)
+  })(({ classes, color, ...other }) => <CircularProgress classes={classes} color="inherit" {...other} />)
 )
 
 export default StyledCircularProgress

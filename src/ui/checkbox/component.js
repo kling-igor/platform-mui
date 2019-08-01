@@ -3,33 +3,31 @@ import { clone } from 'ramda'
 
 export default Component => ({ viewState }) => {
   const {
-    id = 'button',
-    visibility = true,
-    title = 'Button',
+    id,
+    visibility,
+    title,
+    value,
     mergedStyle,
     mergedActiveStyle,
     mergedDisabledStyle,
-    kind,
-    loading,
-    readonly,
-    icon,
-    onPress
+    iconPlacement,
+    onChangeFunc,
+    readonly
   } = viewState
 
-  if (!visibility || !mergedStyle) return null
+  if (!visibility) return null
 
   return (
     <Component
       id={id}
       title={title}
+      value={value}
       style={clone(mergedStyle)}
       activeStyle={clone(mergedActiveStyle)}
       disabledStyle={clone(mergedDisabledStyle)}
-      kind={kind}
-      loading={loading}
-      disabled={readonly}
-      icon={icon}
-      // onPress={onPress} // нет нужды передавать обработчик
+      iconPlacement={iconPlacement}
+      onChange={onChangeFunc}
+      readonly={readonly}
     />
   )
 }

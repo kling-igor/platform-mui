@@ -50,9 +50,9 @@ const buttonState = {
   id: 'mybutton',
   visibility: true,
   title: 'Home',
-  kind: 'icon', //text, outlined, contained, icon, custom
-  loading: false,
-  readonly: true,
+  kind: 'contained', //text, outlined, contained, icon, custom
+  loading: true,
+  readonly: false,
   icon: 'home',
   onPress: () => {
     console.log('PRESS')
@@ -69,7 +69,7 @@ const buttonState = {
       ],
       label: [
         {
-          color: '#f00',
+          color: '#fff',
           textTransform: 'uppercase' // none, capitalize, lowercase, uppercase
         }
       ]
@@ -109,10 +109,51 @@ const buttonState = {
   ]
 }
 
+const checkboxState = {
+  type: 'checkbox',
+  id: 'mycheckbox',
+  visibility: true,
+  title: 'CheckMe',
+  iconPlacement: 'start', // start, end
+  value: true,
+  readonly: false,
+  onChangeFunc: () => {},
+  styles: [
+    {
+      self: [{}],
+      icon: [
+        {
+          color: '#0f0'
+        }
+      ],
+      title: [
+        {
+          color: '#f00'
+        }
+      ]
+    }
+  ],
+  activeStyles: [
+    {
+      self: [{}],
+      icon: [{}],
+      title: [{}]
+    }
+  ],
+  disabledStyles: [
+    {
+      self: [{}],
+      icon: [{}],
+      title: [{}]
+    }
+  ]
+}
+
 const renderNode = viewState => {
   const { type, styles, activeStyles, disabledStyles } = viewState
 
   const Node = widgets[type]
+
   if (!Node) {
     console.error('unable to find widget for type:', type)
     return null
@@ -128,10 +169,10 @@ const renderNode = viewState => {
   return <Node viewState={state} />
 }
 
-export default hot(
-  class App extends PureComponent {
-    render() {
-      return <WebRoot theme={theme}>{renderNode(buttonState)}</WebRoot>
-    }
+class App extends PureComponent {
+  render() {
+    return <WebRoot theme={theme}>{renderNode(checkboxState)}</WebRoot>
   }
-)
+}
+
+export default hot(App)
