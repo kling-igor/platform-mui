@@ -50,7 +50,7 @@ const buttonState = {
   id: 'mybutton',
   visibility: true,
   title: 'Home',
-  kind: 'contained', //text, outlined, contained, icon, custom
+  kind: 'text', //text, outlined, contained, icon, custom
   loading: true,
   readonly: false,
   icon: 'home',
@@ -69,7 +69,7 @@ const buttonState = {
       ],
       label: [
         {
-          color: '#fff',
+          color: '#f00',
           textTransform: 'uppercase' // none, capitalize, lowercase, uppercase
         }
       ]
@@ -163,7 +163,12 @@ const toggleState = {
       self: [{}],
       thumb: [
         {
-          color: '#f00'
+          backgroundColor: '#f00'
+        }
+      ],
+      thumbSwitched: [
+        {
+          backgroundColor: '#f0f'
         }
       ],
       track: [
@@ -182,6 +187,7 @@ const toggleState = {
     {
       self: [{}],
       thumb: [{}],
+      thumbSwitched: [{}],
       track: [{}],
       trackSwitched: [{}]
     }
@@ -190,6 +196,7 @@ const toggleState = {
     {
       self: [{}],
       thumb: [{}],
+      thumbSwitched: [{}],
       track: [{}],
       trackSwitched: [{}]
     }

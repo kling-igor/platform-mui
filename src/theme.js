@@ -175,10 +175,10 @@ export default {
   textarea: input,
   toggle: {
     self: [],
-    thumb: [],
-    thumbSwitched: [],
-    track: [],
-    trackSwitched: []
+    thumb: [{}],
+    thumbSwitched: [{}],
+    track: [{}],
+    trackSwitched: [{}]
   },
   view: {
     self: []

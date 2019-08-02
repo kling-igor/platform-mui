@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import MaterialSwitch from '@material-ui/core/Switch'
 
 // IT WORKS!!! https://medium.com/p/e0759f9a15ce/responses/show
-const StyledSwitch = styled(({ thumbColor, trackColor, switchedTrackColor, ...other }) => (
+const StyledSwitch = styled(({ thumbColor, switchedThumbColor, trackColor, switchedTrackColor, ...other }) => (
   <MaterialSwitch {...other} />
 ))`
   /*thumb on*/
   .MuiSwitch-switchBase.Mui-checked {
-    color: ${({ thumbColor }) => thumbColor};
+    color: ${({ switchedThumbColor }) => switchedThumbColor};
   }
 
   /*track on*/
@@ -32,7 +32,8 @@ const StyledSwitch = styled(({ thumbColor, trackColor, switchedTrackColor, ...ot
 const Toggle = memo(({ id, value, readonly, style, activeStyle = {}, disabledStyle = {}, onChange }) => {
   const {
     self: [{}] = [{}],
-    thumb: [{ color: thumbColor }] = [{}],
+    thumb: [{ backgroundColor: thumbColor }] = [{}],
+    thumbSwitched: [{ backgroundColor: switchedThumbColor }] = [{}],
     track: [{ backgroundColor: trackColor }] = [{}],
     trackSwitched: [{ backgroundColor: switchedTrackColor }] = [{}]
   } = style
@@ -45,6 +46,7 @@ const Toggle = memo(({ id, value, readonly, style, activeStyle = {}, disabledSty
       disabled={readonly}
       onChange={onChange}
       thumbColor={thumbColor}
+      switchedThumbColor={switchedThumbColor}
       trackColor={trackColor}
       switchedTrackColor={switchedTrackColor}
     />
