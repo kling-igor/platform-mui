@@ -4,29 +4,25 @@ import { withStyles } from '@material-ui/core/styles'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import MaterialCheckbox from '@material-ui/core/Checkbox'
 
-const StyledCheckbox = withTheme(
-  withStyles({
-    root: {
+const StyledCheckbox = withStyles(theme => ({
+  root: {
+    color: ({ iconColor, disabled }) => (disabled ? null : iconColor)
+  },
+  checked: {
+    '&$checked': {
       color: ({ iconColor, disabled }) => (disabled ? null : iconColor)
-    },
-    checked: {
-      '&$checked': {
-        color: ({ iconColor, disabled }) => (disabled ? null : iconColor)
-      }
     }
-  })(({ classes, theme, iconColor, ...other }) => <MaterialCheckbox classes={classes} {...other} />)
-)
+  }
+}))(({ classes, theme, iconColor, ...other }) => <MaterialCheckbox classes={classes} {...other} />)
 
-const StyledFormControlLabel = withTheme(
-  withStyles({
-    root: {
-      marginLeft: '0px'
-    },
-    label: {
-      color: ({ labelColor }) => labelColor
-    }
-  })(({ classes, theme, labelColor, ...other }) => <FormControlLabel classes={classes} {...other} />)
-)
+const StyledFormControlLabel = withStyles(theme => ({
+  root: {
+    marginLeft: '0px'
+  },
+  label: {
+    color: ({ labelColor }) => labelColor
+  }
+}))(({ classes, theme, labelColor, ...other }) => <FormControlLabel classes={classes} {...other} />)
 
 const placements = {
   start: 'end',
@@ -46,14 +42,7 @@ const Checkbox = memo(
     return (
       <StyledFormControlLabel
         control={
-          <StyledCheckbox
-            id={id}
-            checked={value}
-            disabled={readonly}
-            onChange={onChange}
-            label={title}
-            iconColor={iconColor}
-          />
+          <StyledCheckbox id={id} checked={value} disabled={readonly} onChange={onChange} iconColor={iconColor} />
         }
         label={title}
         labelPlacement={labelPlacement(iconPlacement)}

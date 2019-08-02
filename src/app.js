@@ -149,6 +149,53 @@ const checkboxState = {
   ]
 }
 
+const toggleState = {
+  type: 'toggle',
+  id: 'mytoggle',
+  visibility: true,
+  title: 'SwitchMe',
+  iconPlacement: 'start', // start, end
+  value: false,
+  readonly: false,
+  onChangeFunc: () => {},
+  styles: [
+    {
+      self: [{}],
+      thumb: [
+        {
+          color: '#f00'
+        }
+      ],
+      track: [
+        {
+          backgroundColor: '#0f0'
+        }
+      ],
+      trackSwitched: [
+        {
+          backgroundColor: '#00f'
+        }
+      ]
+    }
+  ],
+  activeStyles: [
+    {
+      self: [{}],
+      thumb: [{}],
+      track: [{}],
+      trackSwitched: [{}]
+    }
+  ],
+  disabledStyles: [
+    {
+      self: [{}],
+      thumb: [{}],
+      track: [{}],
+      trackSwitched: [{}]
+    }
+  ]
+}
+
 const renderNode = viewState => {
   const { type, styles, activeStyles, disabledStyles } = viewState
 
@@ -171,7 +218,7 @@ const renderNode = viewState => {
 
 class App extends PureComponent {
   render() {
-    return <WebRoot theme={theme}>{renderNode(checkboxState)}</WebRoot>
+    return <WebRoot theme={theme}>{renderNode(toggleState)}</WebRoot>
   }
 }
 

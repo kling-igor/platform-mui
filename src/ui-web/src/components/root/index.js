@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { createMuiTheme } from '@material-ui/core/styles'
-import { ThemeProvider } from '@material-ui/styles'
+import { ThemeProvider, StylesProvider } from '@material-ui/styles'
 
 const fullContainerSize = { height: '100%', width: '100%' }
 
@@ -35,12 +35,14 @@ class Root extends PureComponent {
 
     return (
       <div style={fullContainerSize}>
-        <ThemeProvider theme={muiTheme}>
-          <>
-            {this.props.children}
-            <ToastContainer />
-          </>
-        </ThemeProvider>
+        <StylesProvider injectFirst>
+          <ThemeProvider theme={muiTheme}>
+            <>
+              {this.props.children}
+              <ToastContainer />
+            </>
+          </ThemeProvider>
+        </StylesProvider>
       </div>
     )
   }

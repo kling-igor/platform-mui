@@ -19,63 +19,59 @@ const clickImpl = (click, stopPropagation = false) => event => {
   click && click()
 }
 
-const StyledButton = withTheme(
-  withStyles({
-    // Styles applied to the root element
-    root: {
-      width: ({ width }) => width,
-      height: ({ height }) => height
-    },
+const StyledButton = withStyles(theme => ({
+  // Styles applied to the root element
+  root: {
+    width: ({ width }) => width,
+    height: ({ height }) => height
+  },
 
-    // Styles applied to the span element that wraps the children
-    label: {
-      color: ({ color, disabled }) => (disabled ? null : color)
-    },
+  // Styles applied to the span element that wraps the children
+  label: {
+    color: ({ color, disabled }) => (disabled ? null : color)
+  },
 
-    //Styles applied to the root element if variant="text"
-    text: {
-      // define attrs for variant="text" here
-    },
+  //Styles applied to the root element if variant="text"
+  text: {
+    // define attrs for variant="text" here
+  },
 
-    // Styles applied to the root element if variant="outlined"
-    outlined: {
-      borderColor: ({ backgroundColor }) => backgroundColor
-    },
+  // Styles applied to the root element if variant="outlined"
+  outlined: {
+    borderColor: ({ backgroundColor }) => backgroundColor
+  },
 
-    // Styles applied to the root element if variant="contained"
-    contained: {
+  // Styles applied to the root element if variant="contained"
+  contained: {
+    backgroundColor: ({ backgroundColor }) => backgroundColor,
+    '&:hover': {
       backgroundColor: ({ backgroundColor }) => backgroundColor,
-      '&:hover': {
-        backgroundColor: ({ backgroundColor }) => backgroundColor,
-        filter: 'brightness(85%)'
-      }
-    },
-
-    // pseudo-class applied to the root element if disabled={true}
-    disabled: {
-      // define attrs for disabled state here
+      filter: 'brightness(85%)'
     }
-  })(({ classes, theme, width, height, backgroundColor, color, ...other }) => (
-    <MaterialButton classes={classes} {...other} />
-  ))
-)
+  },
 
-const StyledIconButton = withTheme(
-  withStyles({
-    // Styles applied to the root element
-    root: {},
+  // pseudo-class applied to the root element if disabled={true}
+  disabled: {
+    // define attrs for disabled state here
+  }
+}))(({ classes, theme, width, height, backgroundColor, color, ...other }) => (
+  <MaterialButton classes={classes} {...other} />
+))
 
-    // Styles applied to the span element that wraps the children
-    label: {
-      color: ({ color, disabled }) => (disabled ? null : color)
-    },
+const StyledIconButton = withStyles(theme => ({
+  // Styles applied to the root element
+  root: {},
 
-    // pseudo-class applied to the root element if disabled={true}
-    disabled: {
-      // define attrs for disabled state here
-    }
-  })(({ classes, theme, color, ...other }) => <IconButton classes={classes} {...other} />)
-)
+  // Styles applied to the span element that wraps the children
+  label: {
+    color: ({ color, disabled }) => (disabled ? null : color)
+  },
+
+  // pseudo-class applied to the root element if disabled={true}
+  disabled: {
+    // define attrs for disabled state here
+  }
+}))(({ classes, theme, color, ...other }) => <IconButton classes={classes} {...other} />)
 
 const Button = memo(
   ({
