@@ -203,6 +203,46 @@ const toggleState = {
   ]
 }
 
+const checkboxGroupState = {
+  type: 'checkboxgroup',
+  id: 'mycheckboxgroup',
+  visibility: true,
+  readonly: false,
+  orientation: 'vertical', // vertical, horizontal
+  iconPlacement: 'start', // start end
+  styles: [
+    {
+      self: [{}],
+      listItem: [{}],
+      listItemTitle: [{ color: '#f00' }],
+      listItemIcon: [{ color: '#0f0' }]
+    }
+  ],
+  activeStyles: [],
+  disabledStyles: [],
+  onSelectFunc: () => {},
+  data: [
+    {
+      id: '1',
+      title: 'One',
+      value: 'The One'
+    },
+    {
+      id: '2',
+      title: 'Two',
+      value: 'The Two'
+    }
+  ],
+  // выбранные значения
+  value: [
+    {
+      id: '1',
+      title: 'One',
+      value: 'The One'
+    }
+  ]
+}
+
 const renderNode = viewState => {
   const { type, styles, activeStyles, disabledStyles } = viewState
 
@@ -225,7 +265,7 @@ const renderNode = viewState => {
 
 class App extends PureComponent {
   render() {
-    return <WebRoot theme={theme}>{renderNode(toggleState)}</WebRoot>
+    return <WebRoot theme={theme}>{renderNode(checkboxGroupState)}</WebRoot>
   }
 }
 

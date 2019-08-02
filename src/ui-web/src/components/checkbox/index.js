@@ -17,7 +17,8 @@ const StyledCheckbox = withStyles(theme => ({
 
 const StyledFormControlLabel = withStyles(theme => ({
   root: {
-    marginLeft: '0px'
+    marginLeft: '0px',
+    marginRight: '16px'
   },
   label: {
     color: ({ labelColor }) => labelColor
