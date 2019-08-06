@@ -2,6 +2,7 @@ import appbar from './appbar'
 import button from './button'
 import checkbox from './checkbox'
 import checkboxgroup from './checkboxgroup'
+import datetime from './datetime'
 import icon from './icon'
 import image from './image'
 import toggle from './toggle'
@@ -12,6 +13,7 @@ export default {
   button,
   checkbox,
   checkboxgroup,
+  datetime,
   icon,
   image,
   toggle,

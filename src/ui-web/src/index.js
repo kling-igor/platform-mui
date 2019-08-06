@@ -6,6 +6,8 @@ export { default as Checkbox } from './components/checkbox'
 
 export { default as CheckboxGroup } from './components/checkboxgroup'
 
+export { default as DateTime } from './components/datetime'
+
 export { default as Icon } from './components/icon'
 
 export { default as Image } from './components/image'
