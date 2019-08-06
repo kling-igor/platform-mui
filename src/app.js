@@ -1,7 +1,9 @@
 import { hot } from 'react-hot-loader/root'
 import React, { PureComponent } from 'react'
 import * as uikit from './ui-web/src'
+import states from './states'
 import components from './ui'
+import withViewHOC from './ui/utils/withViewHOC'
 import theme from './theme'
 import StyleService from './StyleService'
 
@@ -40,246 +42,11 @@ function useWidget(widget) {
   })
 }
 
+usePlugin(withViewHOC)
 Object.values(uikit).forEach(usePlugin)
 Object.values(components).forEach(useWidget)
 
 const WebRoot = views.root
-
-const buttonState = {
-  type: 'button',
-  id: 'mybutton',
-  visibility: true,
-  title: 'Home',
-  kind: 'text', //text, outlined, contained, icon, custom
-  loading: true,
-  readonly: false,
-  icon: 'home',
-  onPress: () => {
-    console.log('PRESS')
-  },
-  styles: [
-    {
-      self: [
-        {
-          backgroundColor: '#00f',
-          borderWidth: '3px',
-          borderRadius: 4,
-          borderWidth: 0
-        }
-      ],
-      label: [
-        {
-          color: '#f00',
-          textTransform: 'uppercase' // none, capitalize, lowercase, uppercase
-        }
-      ]
-    }
-  ],
-  activeStyles: [
-    {
-      self: [
-        {
-          backgroundColor: '#ff0',
-          borderRadius: 2,
-          borderWidth: 0
-        }
-      ],
-      label: [
-        {
-          color: 'rgba(0,0,0,0.6)'
-        }
-      ]
-    }
-  ],
-  disabledStyles: [
-    {
-      self: [
-        {
-          backgroundColor: 'lightgray',
-          borderRadius: 2,
-          borderWidth: 0
-        }
-      ],
-      label: [
-        {
-          color: 'white'
-        }
-      ]
-    }
-  ]
-}
-
-const checkboxState = {
-  type: 'checkbox',
-  id: 'mycheckbox',
-  visibility: true,
-  title: 'CheckMe',
-  iconPlacement: 'start', // start, end
-  value: true,
-  readonly: false,
-  onChangeFunc: () => {},
-  styles: [
-    {
-      self: [{}],
-      icon: [
-        {
-          color: '#0f0'
-        }
-      ],
-      title: [
-        {
-          color: '#f00'
-        }
-      ]
-    }
-  ],
-  activeStyles: [
-    {
-      self: [{}],
-      icon: [{}],
-      title: [{}]
-    }
-  ],
-  disabledStyles: [
-    {
-      self: [{}],
-      icon: [{}],
-      title: [{}]
-    }
-  ]
-}
-
-const toggleState = {
-  type: 'toggle',
-  id: 'mytoggle',
-  visibility: true,
-  title: 'SwitchMe',
-  iconPlacement: 'start', // start, end
-  value: false,
-  readonly: false,
-  onChangeFunc: () => {},
-  styles: [
-    {
-      self: [{}],
-      thumb: [
-        {
-          backgroundColor: '#f00'
-        }
-      ],
-      thumbSwitched: [
-        {
-          backgroundColor: '#f0f'
-        }
-      ],
-      track: [
-        {
-          backgroundColor: '#0f0'
-        }
-      ],
-      trackSwitched: [
-        {
-          backgroundColor: '#00f'
-        }
-      ]
-    }
-  ],
-  activeStyles: [
-    {
-      self: [{}],
-      thumb: [{}],
-      thumbSwitched: [{}],
-      track: [{}],
-      trackSwitched: [{}]
-    }
-  ],
-  disabledStyles: [
-    {
-      self: [{}],
-      thumb: [{}],
-      thumbSwitched: [{}],
-      track: [{}],
-      trackSwitched: [{}]
-    }
-  ]
-}
-
-const checkboxGroupState = {
-  type: 'checkboxgroup',
-  id: 'mycheckboxgroup',
-  visibility: true,
-  readonly: false,
-  orientation: 'vertical', // vertical, horizontal
-  iconPlacement: 'start', // start end
-  styles: [
-    {
-      self: [{}],
-      listItem: [{}],
-      listItemTitle: [{ color: '#f00' }],
-      listItemIcon: [{ color: '#0f0' }]
-    }
-  ],
-  activeStyles: [{}],
-  disabledStyles: [{}],
-  onSelectFunc: () => {},
-  data: [
-    {
-      id: '1',
-      title: 'One',
-      value: 'The One'
-    },
-    {
-      id: '2',
-      title: 'Two',
-      value: 'The Two'
-    }
-  ],
-  // выбранные значения
-  value: [
-    {
-      id: '1',
-      title: 'One',
-      value: 'The One'
-    }
-  ]
-}
-
-const radiogroupState = {
-  type: 'radiogroup',
-  id: 'myradiogroup',
-  visibility: true,
-  readonly: false,
-  orientation: 'vertical', // vertical, horizontal
-  iconPlacement: 'start', // start end
-  styles: [
-    {
-      self: [{}],
-      listItem: [{}],
-      listItemTitle: [{ color: '#f00' }],
-      listItemIcon: [{ color: '#0f0' }]
-    }
-  ],
-  activeStyles: [{}],
-  disabledStyles: [{}],
-  onSelectFunc: () => {},
-  data: [
-    {
-      id: '1',
-      title: 'One',
-      value: 'The One'
-    },
-    {
-      id: '2',
-      title: 'Two',
-      value: 'The Two'
-    }
-  ],
-  // выбранное значение
-  value: {
-    id: '1',
-    title: 'One',
-    value: 'The One'
-  }
-}
 
 const renderNode = viewState => {
   const { type, styles, activeStyles, disabledStyles } = viewState
@@ -301,9 +68,10 @@ const renderNode = viewState => {
   return <Node viewState={state} />
 }
 
+// TODO: change state to draw specified component
 class App extends PureComponent {
   render() {
-    return <WebRoot theme={theme}>{renderNode(radiogroupState)}</WebRoot>
+    return <WebRoot theme={theme}>{renderNode(states.appbar)}</WebRoot>
   }
 }
 

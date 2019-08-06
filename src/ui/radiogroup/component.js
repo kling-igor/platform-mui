@@ -3,8 +3,8 @@ import { clone } from 'ramda'
 
 export default Component => ({ viewState }) => {
   const {
-    id,
-    visibility,
+    id = 'radiogroup',
+    visibility = true,
     mergedStyle,
     mergedActiveStyle,
     mergedDisabledStyle,

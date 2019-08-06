@@ -1,3 +1,5 @@
+export { default as AppBar } from './components/appbar'
+
 export { default as Button } from './components/button'
 
 export { default as View } from './components/view'

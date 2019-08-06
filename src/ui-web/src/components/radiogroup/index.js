@@ -6,36 +6,64 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Radio from '@material-ui/core/Radio'
 import MaterialRadioGroup from '@material-ui/core/RadioGroup'
 
-const RadioGroupItem = memo((item, onClick) => {
+const placements = {
+  start: 'end',
+  end: 'start'
+}
+
+const labelPlacement = iconPlacement => placements[iconPlacement] || 'start'
+
+// контейнер для компенсации отрицательных границ, получаемых при расположении лейбла после радиокнопки
+const RowStyle = styled.div`
+  margin-left: ${({ labelPlacement }) => (labelPlacement === 'start' ? '0px' : '11px')};
+  margin-right: 0px;
+`
+
+const RadioGroupItem = memo(({ item, checked, labelPlacement, disabled }) => {
   const { id, title, value } = item
 
   return (
-    <FormControlLabel
-      value="top"
-      control={
-        <Radio
-          checked={true}
-          onChange={onClick}
-          value={value}
-          color="default"
-          name="radio-button-demo"
-          // inputProps={{ 'aria-label': 'E' }}
-          // icon={<RadioButtonUncheckedIcon fontSize="small" />}
-          // checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
-        />
-      }
-      label={title}
-      labelPlacement="end"
-    />
+    <RowStyle labelPlacement={labelPlacement}>
+      <FormControlLabel
+        id={id}
+        value={id}
+        control={
+          <Radio
+            checked={checked}
+            value={value}
+            disabled={disabled}
+            color="default"
+            // icon={<RadioButtonUncheckedIcon fontSize="small" />}
+            // checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
+          />
+        }
+        label={<span style={{ color: 'red' }}>{title}</span>}
+        labelPlacement={labelPlacement}
+      />
+    </RowStyle>
   )
 })
 
+const onSelect = (onSelectFunc, data) => event => onSelectFunc(data.find(item => item.id === event.target.value))
+
 const RadioGroup = Icon =>
-  memo(({ id, data, value, orientation }) => {
+  memo(({ id, data, value, readonly, orientation, iconPlacement, onSelectFunc, style, activeStyle, disabledStyle }) => {
     return (
-      <MaterialRadioGroup aria-label="position" name="" value={null} onChange={() => {}} row={false}>
+      <MaterialRadioGroup
+        id={id}
+        name={id}
+        value={(value && value.id) || -1}
+        onChange={onSelect(onSelectFunc, data)}
+        row={orientation === 'horizontal'}
+      >
         {data.map(item => (
-          <RadioGroupItem item={item} onClick={() => {}} />
+          <RadioGroupItem
+            key={item.id}
+            item={item}
+            disabled={readonly}
+            checked={value && value.id === item.id}
+            labelPlacement={labelPlacement(iconPlacement)}
+          />
         ))}
       </MaterialRadioGroup>
     )
