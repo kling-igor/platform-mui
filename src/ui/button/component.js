@@ -16,7 +16,7 @@ export default Component => ({ viewState }) => {
     onPress
   } = viewState
 
-  if (!visibility || !mergedStyle) return null
+  if (!visibility) return null
 
   return (
     <Component

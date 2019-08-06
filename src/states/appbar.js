@@ -3,11 +3,11 @@ export default {
   type: 'appbar',
   title: 'Title',
   visibility: true,
-  leftIcon: null,
+  leftIcon: 'menu',
   leftClick: () => {},
   menuIcon: 'dots-vertical',
   menuItemClick: () => {},
-  isSearching: false,
+  isSearching: true,
   hasTabs: false,
   elements: [
     {
@@ -25,7 +25,11 @@ export default {
   clearValue: () => {},
   styles: [
     {
-      self: [],
+      self: [
+        {
+          backgroundColor: 'blue'
+        }
+      ],
       title: [],
       menu: [],
       menuItem: [],
