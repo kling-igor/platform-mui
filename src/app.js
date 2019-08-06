@@ -71,7 +71,7 @@ const renderNode = viewState => {
 // TODO: change state to draw specified component
 class App extends PureComponent {
   render() {
-    return <WebRoot theme={theme}>{renderNode(states.appbar)}</WebRoot>
+    return <WebRoot theme={theme}>{renderNode(states.image)}</WebRoot>
   }
 }
 
