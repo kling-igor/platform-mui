@@ -34,7 +34,8 @@ export default Component => ({ viewState }) => {
     okLabel,
     cancelLabel,
     onChangeFunc,
-    locale
+    locale,
+    extendedSettings = {}
   } = viewState
 
   if (!visibility) return null
@@ -58,6 +59,7 @@ export default Component => ({ viewState }) => {
       cancelLabel={cancelLabel}
       format={format}
       onChange={onChangeFunc}
+      extendedSettings={extendedSettings}
       locale={locale} // приходит из hoc
     />
   )

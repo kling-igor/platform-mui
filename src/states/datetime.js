@@ -1,9 +1,9 @@
 export default {
   id: 'appbar',
   type: 'datetime',
-  displayType: 'datetime', // date, time, datetime
+  displayType: 'time', // date, time, datetime
   visibility: true,
-  title: null,
+  title: 'Input date',
   isFloatingTitle: false,
   kind: 'flat', // flat, outlined
   readonly: false,
@@ -15,6 +15,14 @@ export default {
   cancelLabel: 'Cancel',
   error: null,
   onChangeFunc: () => {},
+  extendedSettings: {
+    // views: ['year', 'month'], // показать только выбор года и месяца (по умолчанию 'date')
+    // helperText: 'Start from year selection', // вспомогательный подстрочный текст
+    inputVariant: 'outlined', // тип input ("standard" | "outlined" | "filled")
+    autoOk: true,
+    orientation: 'portrait' //"portrait" | "landscape"
+    // variant: 'inline' - будет показан не в центре экрана, а сразу под полем ввода
+  },
   styles: [
     {
       self: [],

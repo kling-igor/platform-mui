@@ -23,3 +23,12 @@
 //     </MuiPickersUtilsProvider>
 //   )
 // })
+
+import React, { memo } from 'react'
+import { DatePicker as MaterialDatePicker } from '@material-ui/pickers'
+
+const DatePicker = memo(props => {
+  return <MaterialDatePicker {...props} />
+})
+
+export default DatePicker
