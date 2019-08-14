@@ -4,8 +4,10 @@ export default {
   id: 'myfab',
   type: 'fab',
   icon: 'home',
-  styles: [],
-  readonly: false,
+  styles: [
+    { self: [{ backgroundColor: '#ff0' }], icon: [{ color: 'green' }], disabled: [{ backgroundColor: '#f0f' }] }
+  ],
+  readonly: true,
   hasShadow: false,
   onClick: () => {}
 }

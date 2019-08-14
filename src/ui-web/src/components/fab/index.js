@@ -20,7 +20,7 @@ const FAB = memo(({ id, icon = 'plus', style, readonly = false, onPress = noop, 
 
   return (
     <RootStyle>
-      <Fab style={fabStyle}>
+      <Fab style={fabStyle} disabled={readonly}>
         <Icon id="fabIcon" icon={icon} color={color} size={24} />
       </Fab>
     </RootStyle>
