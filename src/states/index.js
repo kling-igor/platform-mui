@@ -8,6 +8,9 @@ import image from './image'
 import toggle from './toggle'
 import radiogroup from './radiogroup'
 
+// does not exist
+import fab from './fab'
+
 export default {
   appbar,
   button,
@@ -17,5 +20,6 @@ export default {
   icon,
   image,
   toggle,
-  radiogroup
+  radiogroup,
+  fab
 }

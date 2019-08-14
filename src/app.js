@@ -1,9 +1,9 @@
 import { hot } from 'react-hot-loader/root'
 import React, { PureComponent } from 'react'
-import * as uikit from './ui-web/src'
 import states from './states'
 import components from './ui'
 import withViewHOC from './ui/utils/withViewHOC'
+import * as uikit from './ui-web/src'
 import theme from './theme'
 import StyleService from './StyleService'
 
@@ -43,7 +43,9 @@ function useWidget(widget) {
 }
 
 usePlugin(withViewHOC)
+// конкретные web-имплементации
 Object.values(uikit).forEach(usePlugin)
+// ui-обертки работающие с viewState
 Object.values(components).forEach(useWidget)
 
 const WebRoot = views.root
@@ -71,7 +73,7 @@ const renderNode = viewState => {
 // TODO: change state to draw specified component
 class App extends PureComponent {
   render() {
-    return <WebRoot theme={theme}>{renderNode(states.datetime)}</WebRoot>
+    return <WebRoot theme={theme}>{renderNode(states.fab)}</WebRoot>
   }
 }
 

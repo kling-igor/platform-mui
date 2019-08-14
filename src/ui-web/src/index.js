@@ -19,3 +19,5 @@ export { default as RadioGroup } from './components/radiogroup'
 export { default as RootComponent } from './components/root'
 
 export { default as View } from './components/view'
+
+export { default as FAB } from './components/fab'
