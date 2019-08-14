@@ -7,6 +7,7 @@ import icon from './icon'
 import image from './image'
 import toggle from './toggle'
 import radiogroup from './radiogroup'
+import input from './input'
 
 // в платформе такой компонент отсутствует
 import fab from './fab'
@@ -21,6 +22,7 @@ export default {
   image,
   toggle,
   radiogroup,
+  input,
 
   fab
 }

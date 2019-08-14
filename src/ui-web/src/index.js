@@ -21,3 +21,5 @@ export { default as RootComponent } from './components/root'
 export { default as View } from './components/view'
 
 export { default as FAB } from './components/fab'
+
+export { default as Input } from './components/input'
