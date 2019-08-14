@@ -5,7 +5,11 @@ export default {
   type: 'fab',
   icon: 'home',
   styles: [
-    { self: [{ backgroundColor: '#ff0' }], icon: [{ color: 'green' }], disabled: [{ backgroundColor: '#f0f' }] }
+    {
+      self: [{ backgroundColor: '#ff0', bottom: 30 }],
+      icon: [{ color: 'green' }],
+      disabled: [{ backgroundColor: '#f0f' }]
+    }
   ],
   readonly: true,
   hasShadow: false,

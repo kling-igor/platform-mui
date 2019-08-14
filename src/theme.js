@@ -197,6 +197,6 @@ export default {
   fab: {
     self: [{ backgroundColor: colors.accent, bottom: 30, right: 30 }],
     icon: [{ color: colors.background }],
-    disabled: [{ backgroundColor: colors.disabled, bottom: 30, right: 30 }]
+    disabled: [{ backgroundColor: colors.disabled }]
   }
 }

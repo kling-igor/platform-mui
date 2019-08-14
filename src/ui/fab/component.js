@@ -2,16 +2,7 @@ import React from 'react'
 import { clone } from 'ramda'
 
 export default Component => ({ viewState }) => {
-  const {
-    id = 'fab',
-    visibility = true,
-    icon = 'plus',
-    mergedStyle,
-    mergedActiveStyle,
-    mergedDisabledStyle,
-    readonly,
-    onPress
-  } = viewState
+  const { id = 'fab', visibility = true, icon = 'plus', mergedStyle, readonly, onPress } = viewState
 
   if (!visibility) return null
 
@@ -20,8 +11,6 @@ export default Component => ({ viewState }) => {
       id={id}
       icon={icon}
       style={clone(mergedStyle)}
-      activeStyle={clone(mergedActiveStyle)}
-      disabledStyle={clone(mergedDisabledStyle)}
       readonly={readonly}
       // onPress={onPress} // нет нужды передавать обработчик
     />

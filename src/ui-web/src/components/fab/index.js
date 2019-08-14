@@ -13,10 +13,10 @@ const FAB = memo(({ id, icon = 'plus', style, readonly = false, onPress = noop, 
   const {
     self = [{ backgroundColor: '#f44336', bottom: 30, right: 30 }],
     icon: [{ color = '#fff' }],
-    disabled = [{ backgroundColor: '#bdbdbd', bottom: 30, right: 30 }]
+    disabled = [{ backgroundColor: '#bdbdbd' }]
   } = style
 
-  const fabStyle = Object.assign({ position: 'absolute' }, self[0], readonly ? disabled[0] : {})
+  const fabStyle = Object.assign({ position: 'absolute' }, self[0], readonly ? disabled[0] : null)
 
   return (
     <RootStyle>
