@@ -74,19 +74,7 @@ const StyledIconButton = withStyles(theme => ({
 }))(({ classes, theme, color, ...other }) => <IconButton classes={classes} {...other} />)
 
 const Button = memo(
-  ({
-    id,
-    title,
-    onPress,
-    kind,
-    loading,
-    disabled,
-    style,
-    activeStyle = {},
-    disabledStyle = {},
-    icon,
-    stopPropagation
-  }) => {
+  ({ id, title, onPress, kind, loading, disabled, style, activeStyle, disabledStyle, icon, stopPropagation }) => {
     const onClick = disabled ? null : clickImpl(onPress, stopPropagation)
 
     const { self: [{ width, height, backgroundColor }] = [{}], label: [{ color }] = [{}] } = style
@@ -114,7 +102,7 @@ const Button = memo(
 
     if (kind === 'icon' && icon) {
       return (
-        <StyledIconButton id={id} color={color} onClick={onClick} disabled={disabled}>
+        <StyledIconButton id={id} color={backgroundColor} onClick={onClick} disabled={disabled}>
           <Icon>{icon}</Icon>
         </StyledIconButton>
       )
