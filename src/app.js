@@ -51,7 +51,7 @@ Object.values(components).forEach(useWidget)
 const WebRoot = views.root
 
 const renderNode = viewState => {
-  const { type, styles, activeStyles, disabledStyles } = viewState
+  const { type, styles, activeStyles, disabledStyles, elements = [] } = viewState
 
   const Node = widgets[type]
 
@@ -67,13 +67,13 @@ const renderNode = viewState => {
     mergedDisabledStyle: styleService.mergeStyles(type, disabledStyles)
   }
 
-  return <Node viewState={state} />
+  return <Node viewState={state}>{elements.map(renderNode)}</Node>
 }
 
 // TODO: change state to draw specified component
 class App extends PureComponent {
   render() {
-    return <WebRoot theme={theme}>{renderNode(states.input)}</WebRoot>
+    return <WebRoot theme={theme}>{renderNode(states.accordion)}</WebRoot>
   }
 }
 

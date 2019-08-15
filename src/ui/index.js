@@ -1,3 +1,4 @@
+import accordion from './accordion'
 import appbar from './appbar'
 import button from './button'
 import checkbox from './checkbox'
@@ -13,6 +14,7 @@ import input from './input'
 import fab from './fab'
 
 export default {
+  accordion,
   appbar,
   button,
   checkbox,
