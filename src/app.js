@@ -6,6 +6,7 @@ import withViewHOC from './ui/utils/withViewHOC'
 import * as uikit from './ui-web/src'
 import theme from './theme'
 import StyleService from './StyleService'
+import parser from './formulaParser'
 
 const logger = {
   log: (...args) => console.log(...args)
@@ -21,6 +22,7 @@ const configuration = {
 }
 
 const styleService = StyleService.config({ theme }).create({ configuration, inMemoryStorage, logger })
+const formulaParser = parser.create()
 
 const views = {}
 
@@ -38,7 +40,7 @@ function useWidget(widget) {
   Object.defineProperty(widgets, widget.name, {
     enumerable: true,
     configurable: true,
-    get: () => widget.create(views)
+    get: () => widget.create(views, { formulaParser })
   })
 }
 
@@ -73,7 +75,7 @@ const renderNode = viewState => {
 // TODO: change state to draw specified component
 class App extends PureComponent {
   render() {
-    return <WebRoot theme={theme}>{renderNode(states.accordion)}</WebRoot>
+    return <WebRoot theme={theme}>{renderNode(states.label)}</WebRoot>
   }
 }
 

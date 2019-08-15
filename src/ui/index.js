@@ -6,9 +6,10 @@ import checkboxgroup from './checkboxgroup'
 import datetime from './datetime'
 import icon from './icon'
 import image from './image'
-import toggle from './toggle'
-import radiogroup from './radiogroup'
 import input from './input'
+import label from './label'
+import radiogroup from './radiogroup'
+import toggle from './toggle'
 
 // в платформе такой компонент отсутствует
 import fab from './fab'
@@ -22,9 +23,10 @@ export default {
   datetime,
   icon,
   image,
-  toggle,
-  radiogroup,
   input,
+  label,
+  radiogroup,
+  toggle,
 
   fab
 }
