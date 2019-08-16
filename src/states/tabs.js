@@ -17,13 +17,20 @@ export default {
       screen: 'Tab2',
       title: 'Tab2',
       badge: 0
+    },
+    {
+      id: 'tab_3',
+      visibility: true,
+      screen: 'Tab3',
+      title: 'Tab3',
+      badge: 5
     }
   ],
-  selectedTab: 0,
+  selectedTab: 'tab_2',
   styles: [
     {
       // Стили для всего компонента, включая контент
-      self: [],
+      self: [{ backgroundColor: 'yellowgreen', color: 'black' }],
       // Стили для таббара
       tabBar: [],
       // Стили для активной табины (кнопки на таббаре)
@@ -31,11 +38,11 @@ export default {
       // Стили для заголовков табин
       title: [],
       // Стили для индикатора выбранной табины
-      inkBar: [],
+      inkBar: [{ backgroundColor: 'purple', height: '3px' }],
       // Стили для бэйджа
-      badge: [],
+      badge: [{ backgroundColor: 'black' }],
       // Стили для числа внутри бэйджа
-      badgeText: []
+      badgeText: [{ color: 'yellow' }]
     }
   ]
 }

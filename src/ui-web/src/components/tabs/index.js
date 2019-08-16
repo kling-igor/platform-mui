@@ -1,7 +1,16 @@
 import React, { memo, useState, useCallback, useMemo, useRef } from 'react'
+import AppBar from '@material-ui/core/AppBar'
 import MaterialTabs from '@material-ui/core/Tabs'
 import MaterialTab from '@material-ui/core/Tab'
 import Badge from '@material-ui/core/Badge'
+import { makeStyles } from '@material-ui/core/styles'
+import styled from 'styled-components'
+
+const StyledBadge = styled(({ backgroundColor, ...other }) => <Badge {...other} />)`
+  .MuiBadge-colorPrimary {
+    background-color: ${({ backgroundColor = '#00f' }) => backgroundColor};
+  }
+`
 
 const Tab = memo(({ id, visibility, title, badge, style, isActive }) => {
   if (!visibility) {
@@ -12,10 +21,16 @@ const Tab = memo(({ id, visibility, title, badge, style, isActive }) => {
 
   const label = useMemo(() => {
     if (badge) {
+      const [{ backgroundColor = '#00f' }] = style.badge
+
       return (
-        <Badge badgeContent={<span>{badge}</span>} color="secondary">
+        <StyledBadge
+          backgroundColor={backgroundColor}
+          badgeContent={<span style={style.badgeText[0]}>{badge}</span>}
+          color="primary"
+        >
           {tabTitleComponent}
-        </Badge>
+        </StyledBadge>
       )
     }
 
@@ -31,8 +46,19 @@ const Tab = memo(({ id, visibility, title, badge, style, isActive }) => {
 
 const getTabIndexById = (tabs, selectedTab) => tabs.findIndex(tab => tab.id === selectedTab)
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+    // backgroundColor: theme.palette.background.paper,
+  }
+}))
+
 const Tabs = memo(({ id, tabs, style, selectedTab, scrollable, onTabChanged }) => {
+  const classes = useStyles()
   const [currentTab, setCurrentTab] = useState(selectedTab ? getTabIndexById(tabs, selectedTab) : 0)
+
+  console.log('selectedTab:', selectedTab)
+  console.log('currentTab:', currentTab)
 
   // TODO закешировать!!!
   const onChange = useCallback((event, index) => {
@@ -53,20 +79,22 @@ const Tabs = memo(({ id, tabs, style, selectedTab, scrollable, onTabChanged }) =
   }, [scrollable])
 
   return (
-    <div>
-      <MaterialTabs
-        id={id}
-        variant={variant}
-        value={currentTab}
-        style={style.self[0]}
-        TabIndicatorProps={{ style: style.inkBar[0] }}
-        onChange={onChange}
-        scrollButtons={scrollButtons}
-      >
-        {tabs.map(tab => (
-          <Tab key={tab.id} style={style} isActive={activeTab === tab.id} {...tab} />
-        ))}
-      </MaterialTabs>
+    <div className={classes.root}>
+      <AppBar position="static">
+        <MaterialTabs
+          id={id}
+          variant={'fullWidth'}
+          value={currentTab}
+          onChange={onChange}
+          style={style.self[0]}
+          TabIndicatorProps={{ style: style.inkBar[0] }}
+          scrollButtons="off"
+        >
+          {tabs.map(tab => (
+            <Tab key={tab.id} style={style} isActive={activeTab === tab.id} {...tab} />
+          ))}
+        </MaterialTabs>
+      </AppBar>
       {tabs.length > 0 && tabs[currentTab].screen}
     </div>
   )

@@ -9,7 +9,7 @@ export default (Component, renderChildScreen) => ({ viewState }) => {
     selectedTab,
     elements,
     scrollable,
-    internalChange,
+    // internalChange,
     renderTab = screen => renderChildScreen(screen, null, /*this.screenId*/ null)
   } = viewState
 
@@ -23,7 +23,7 @@ export default (Component, renderChildScreen) => ({ viewState }) => {
         ...element,
         screen: renderTab(element.screen)
       }))}
-      // selectedTab={selectedTab}
+      selectedTab={selectedTab}
       style={clone(mergedStyle)}
       scrollable={scrollable}
       // onTabChanged={internalChange}
