@@ -23,6 +23,10 @@ const configuration = {
 
 const styleService = StyleService.config({ theme }).create({ configuration, inMemoryStorage, logger })
 const formulaParser = parser.create()
+const renderChildScreen = (screen, params, parent) => {
+  console.log('renderChildScreen:', screen)
+  return null
+}
 
 const views = {}
 
@@ -40,7 +44,7 @@ function useWidget(widget) {
   Object.defineProperty(widgets, widget.name, {
     enumerable: true,
     configurable: true,
-    get: () => widget.create(views, { formulaParser })
+    get: () => widget.create(views, { formulaParser, renderChildScreen })
   })
 }
 
@@ -55,7 +59,7 @@ const WebRoot = views.root
 const renderNode = viewState => {
   const { type, styles, activeStyles, disabledStyles, elements = [] } = viewState
 
-  const Node = widgets[type]
+  const { widget: Node, hasCustomChildren } = widgets[type]
 
   if (!Node) {
     console.error('unable to find widget for type:', type)
@@ -69,13 +73,13 @@ const renderNode = viewState => {
     mergedDisabledStyle: styleService.mergeStyles(type, disabledStyles)
   }
 
-  return <Node viewState={state}>{elements.map(renderNode)}</Node>
+  return <Node viewState={state}>{!hasCustomChildren && elements.map(renderNode)}</Node>
 }
 
 // TODO: change state to draw specified component
 class App extends PureComponent {
   render() {
-    return <WebRoot theme={theme}>{renderNode(states.label)}</WebRoot>
+    return <WebRoot theme={theme}>{renderNode(states.tabs)}</WebRoot>
   }
 }
 

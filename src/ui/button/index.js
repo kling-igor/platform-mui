@@ -2,5 +2,5 @@ import widget from './component'
 export default {
   type: 'widget',
   name: 'button',
-  create: ({ button }) => widget(button)
+  create: ({ button }) => ({ widget: widget(button) })
 }
