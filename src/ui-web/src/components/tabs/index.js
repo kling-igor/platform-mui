@@ -3,7 +3,6 @@ import AppBar from '@material-ui/core/AppBar'
 import MaterialTabs from '@material-ui/core/Tabs'
 import MaterialTab from '@material-ui/core/Tab'
 import Badge from '@material-ui/core/Badge'
-import { makeStyles } from '@material-ui/core/styles'
 import styled from 'styled-components'
 
 const StyledBadge = styled(({ backgroundColor, ...other }) => <Badge {...other} />)`
@@ -38,7 +37,11 @@ const Tab = memo(({ id, visibility, title, badge, style, isActive }) => {
   }, [badge, tabTitleComponent])
 
   const actualStyle = useMemo(() => {
-    return isActive ? style.tab[0] : style.tabBar[0]
+    // табины, рисуемые из цикла, теряют необходимый класс, добавляем вручную свойства из этого класса
+    return Object.assign(
+      { flexGrow: 1, maxWidth: 'none', flexBasis: 0, flexShrink: 1 },
+      isActive ? style.tab[0] : style.tabBar[0]
+    )
   }, [isActive])
 
   return <MaterialTab id={id} key={id} label={label} style={actualStyle} />
@@ -46,19 +49,8 @@ const Tab = memo(({ id, visibility, title, badge, style, isActive }) => {
 
 const getTabIndexById = (tabs, selectedTab) => tabs.findIndex(tab => tab.id === selectedTab)
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-    // backgroundColor: theme.palette.background.paper,
-  }
-}))
-
 const Tabs = memo(({ id, tabs, style, selectedTab, scrollable, onTabChanged }) => {
-  const classes = useStyles()
   const [currentTab, setCurrentTab] = useState(selectedTab ? getTabIndexById(tabs, selectedTab) : 0)
-
-  console.log('selectedTab:', selectedTab)
-  console.log('currentTab:', currentTab)
 
   // TODO закешировать!!!
   const onChange = useCallback((event, index) => {
@@ -79,16 +71,16 @@ const Tabs = memo(({ id, tabs, style, selectedTab, scrollable, onTabChanged }) =
   }, [scrollable])
 
   return (
-    <div className={classes.root}>
+    <div>
       <AppBar position="static">
         <MaterialTabs
           id={id}
-          variant={'fullWidth'}
+          variant={variant}
           value={currentTab}
           onChange={onChange}
           style={style.self[0]}
           TabIndicatorProps={{ style: style.inkBar[0] }}
-          scrollButtons="off"
+          scrollButtons={scrollButtons}
         >
           {tabs.map(tab => (
             <Tab key={tab.id} style={style} isActive={activeTab === tab.id} {...tab} />
