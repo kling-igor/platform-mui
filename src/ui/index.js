@@ -4,6 +4,7 @@ import button from './button'
 import checkbox from './checkbox'
 import checkboxgroup from './checkboxgroup'
 import datetime from './datetime'
+import dropdown from './dropdown'
 import icon from './icon'
 import image from './image'
 import input from './input'
@@ -22,6 +23,7 @@ export default {
   checkbox,
   checkboxgroup,
   datetime,
+  dropdown,
   icon,
   image,
   input,
