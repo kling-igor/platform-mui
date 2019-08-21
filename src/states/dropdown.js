@@ -19,19 +19,23 @@ const data = [
 export default {
   id: 'dropdown',
   type: 'dropdown',
-  kind: 'outlined', // flat | outlined | standard
+  kind: 'flat', // flat | outlined | standard
   visibility: true,
   title: 'Title',
   isFloatingTitle: true,
   readonly: false,
+  error: null,
+  data,
+  value: data[0],
+  isSuggestionsOpened: true,
   styles: [
     {
-      self: [],
+      self: [{ width: 200 }],
       error: [],
-      text: [],
-      list: [],
-      listItemTitle: [],
-      listItem: []
+      text: [{ backgroundColor: '#f002' }],
+      list: [{ borderWidth: '1px', borderColor: '#000', borderStyle: 'solid' }],
+      listItemTitle: [{ color: '#f00' }],
+      listItem: [{ backgroundColor: '#00f' }]
     }
   ],
   activeStyles: [
@@ -53,9 +57,5 @@ export default {
       listItemTitle: [],
       listItem: []
     }
-  ],
-  error: '',
-  data,
-  value: '',
-  isSuggestionsOpened: false
+  ]
 }

@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useRef, useState, useEffect } from 'react'
+import React, { memo, useMemo, useRef, useState, useEffect, useCallback } from 'react'
 import Input from '@material-ui/core/Input'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
 import FilledInput from '@material-ui/core/FilledInput'
@@ -7,14 +7,26 @@ import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormHelperText from '@material-ui/core/FormHelperText'
-
+import { withStyles, makeStyles } from '@material-ui/core/styles'
 import styled from 'styled-components'
 const noop = () => {}
 
-const variants = {
-  flat: 'filled',
-  outlined: 'outlined'
-}
+const renderValue = value => (value && (value.title || value.value)) || ''
+
+const useStyles = makeStyles({
+  self: style => style.self[0],
+  error: style => style.error[0],
+  text: style => style.text[0],
+  poper: style => style.list[0],
+  list: style => ({ paddingTop: 0, paddingBottom: 0 }),
+  listItemTitle: style => style.listItemTitle[0],
+  listItem: style => style.listItem[0],
+  listItemHovered: {
+    '&:hover': {
+      backgroundColor: '#f0f'
+    }
+  }
+})
 
 const Dropdown = memo(
   ({
@@ -32,45 +44,56 @@ const Dropdown = memo(
     isSuggestionsOpened,
     selectItem = () => {}
   }) => {
+    const classes = useStyles(style)
+
     const inputLabel = useRef(null)
     const [labelWidth, setLabelWidth] = useState(0)
     useEffect(() => {
       setLabelWidth(inputLabel.current.offsetWidth)
     }, [])
 
-    const handleChange = event => {
-      selectItem(event.target.value)
-    }
+    const handleChange = useCallback(
+      event => {
+        selectItem(event.target.value)
+      },
+      [selectItem]
+    )
 
-    // const input =
-    //   kind === 'flat' ? (
-    //     <FilledInput name="age" id="filled-age-simple" />
-    //   ) : (
-    //     <OutlinedInput labelWidth={labelWidth} name="age" id="outlined-age-simple" />
-    //   )
+    const input = useMemo(() => {
+      if (kind === 'flat') {
+        return <FilledInput className={classes.text} />
+      }
 
-    const renderValue = value => (value && (value.title || value.value)) || ''
+      return <OutlinedInput className={classes.text} labelWidth={labelWidth} />
+    }, [kind, labelWidth])
 
     return (
-      <FormControl disabled={readonly} error={!!error}>
+      <FormControl id={id} disabled={readonly} error={!!error} className={classes.self}>
         <InputLabel shrink ref={inputLabel}>
           {title}
         </InputLabel>
         <Select
+          open={isSuggestionsOpened}
           value={value}
           autoWidth={false}
           onChange={handleChange}
           renderValue={renderValue}
           displayEmpty
-          variant={variants[kind] || 'standard'}
+          input={input}
+          MenuProps={{ classes: { paper: classes.poper, list: classes.list } }}
         >
           {data.map(item => (
-            <MenuItem key={item.id} value={item.value}>
-              {item.title || item.value}
+            <MenuItem
+              key={item.id}
+              value={item.value}
+              className={`${classes.listItem} ${classes.listItemHovered}`}
+              dense
+            >
+              <span className={`${classes.listItemTitle}`}>{item.title || item.value}</span>
             </MenuItem>
           ))}
         </Select>
-        {!!error && <FormHelperText>{error}</FormHelperText>}
+        {!!error && <FormHelperText style={style.error[0]}>{error}</FormHelperText>}
       </FormControl>
     )
   }
