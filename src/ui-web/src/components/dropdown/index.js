@@ -13,19 +13,21 @@ const noop = () => {}
 
 const renderValue = value => (value && (value.title || value.value)) || ''
 
+var Y = F => (f => f(f))(f => F(x => f(f)(x)))
+
 const useStyles = makeStyles({
-  self: style => style.self[0],
-  error: style => style.error[0],
-  text: style => style.text[0],
-  poper: style => style.list[0],
-  list: style => ({ paddingTop: 0, paddingBottom: 0 }),
-  listItemTitle: style => style.listItemTitle[0],
-  listItem: style => style.listItem[0],
-  listItemHovered: {
+  self: ({ style }) => style.self[0],
+  error: ({ style }) => style.error[0],
+  text: ({ style }) => style.text[0],
+  poper: ({ style }) => style.list[0],
+  list: ({ style }) => ({ paddingTop: 0, paddingBottom: 0 }),
+  listItemTitle: ({ style }) => style.listItemTitle[0],
+  listItem: ({ style }) => style.listItem[0],
+  listItemHovered: ({ style, activeStyle }) => ({
     '&:hover': {
-      backgroundColor: '#f0f'
+      backgroundColor: activeStyle.listItem[0].backgroundColor
     }
-  }
+  })
 })
 
 const Dropdown = memo(
@@ -44,7 +46,7 @@ const Dropdown = memo(
     isSuggestionsOpened,
     selectItem = () => {}
   }) => {
-    const classes = useStyles(style)
+    const classes = useStyles({ style, activeStyle, disabledStyle })
 
     const inputLabel = useRef(null)
     const [labelWidth, setLabelWidth] = useState(0)

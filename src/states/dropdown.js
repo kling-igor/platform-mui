@@ -45,7 +45,7 @@ export default {
       text: [],
       list: [],
       listItemTitle: [],
-      listItem: []
+      listItem: [{ backgroundColor: '#fF0' }]
     }
   ],
   disabledStyles: [
