@@ -1,4 +1,5 @@
 export { default as Accordeon } from './components/accordion'
+export { default as Alert } from './components/alert'
 export { default as AppBar } from './components/appbar'
 export { default as Autocomplete } from './components/autocomplete'
 export { default as Button } from './components/button'
