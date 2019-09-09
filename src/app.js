@@ -8,6 +8,10 @@ import theme from './theme'
 import StyleService from './StyleService'
 import parser from './formulaParser'
 
+import templateService from './templateManager'
+
+const templateManager = templateService.create()
+
 const logger = {
   log: (...args) => console.log(...args)
 }
@@ -44,7 +48,7 @@ function useWidget(widget) {
   Object.defineProperty(widgets, widget.name, {
     enumerable: true,
     configurable: true,
-    get: () => widget.create(views, { formulaParser, renderChildScreen })
+    get: () => widget.create(views, { formulaParser, renderChildScreen, getTemplate: id => templateManager.get(id) })
   })
 }
 

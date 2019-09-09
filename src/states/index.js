@@ -11,6 +11,7 @@ import image from './image'
 import input from './input'
 import label from './label'
 import radiogroup from './radiogroup'
+import swiper from './swiper'
 import tabs from './tabs'
 import toggle from './toggle'
 
@@ -31,6 +32,7 @@ export default {
   input,
   label,
   radiogroup,
+  swiper,
   tabs,
   toggle,
   fab

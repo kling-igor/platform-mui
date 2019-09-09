@@ -21,6 +21,7 @@
     "ramda": "^0.26.1",
     "react": "16.8.6",
     "react-dom": "^16.8.6",
+    "react-responsive-carousel": "^3.1.50",
     "react-toastify": "^5.3.2",
     "styled-components": "^4.3.2",
     "uuid": "^3.3.2"
