@@ -1,6 +1,7 @@
 import accordion from './accordion'
 import appbar from './appbar'
 import autocomplete from './autocomplete'
+import bottomnavigation from './bottomnavigation'
 import button from './button'
 import checkbox from './checkbox'
 import checkboxgroup from './checkboxgroup'

@@ -2,6 +2,7 @@ import accordion from './accordion'
 import appbar from './appbar'
 import autocomplete from './autocomplete'
 import button from './button'
+import bottomnavigation from './bottomnavigation'
 import checkbox from './checkbox'
 import checkboxgroup from './checkboxgroup'
 import datetime from './datetime'
@@ -22,6 +23,7 @@ export default {
   accordion,
   appbar,
   autocomplete,
+  bottomnavigation,
   button,
   checkbox,
   checkboxgroup,
