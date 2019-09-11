@@ -11,6 +11,7 @@ import icon from './icon'
 import image from './image'
 import input from './input'
 import label from './label'
+import list from './list'
 import radiogroup from './radiogroup'
 import swiper from './swiper'
 import tabs from './tabs'
@@ -32,6 +33,7 @@ export default {
   image,
   input,
   label,
+  list,
   radiogroup,
   swiper,
   tabs,
