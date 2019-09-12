@@ -6,6 +6,7 @@ import bottomnavigation from './bottomnavigation'
 import checkbox from './checkbox'
 import checkboxgroup from './checkboxgroup'
 import datetime from './datetime'
+import drawer from './drawer'
 import dropdown from './dropdown'
 import icon from './icon'
 import image from './image'
@@ -29,6 +30,7 @@ export default {
   checkbox,
   checkboxgroup,
   datetime,
+  drawer,
   dropdown,
   icon,
   image,

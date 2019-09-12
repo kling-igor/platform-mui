@@ -6,6 +6,7 @@ import button from './button'
 import checkbox from './checkbox'
 import checkboxgroup from './checkboxgroup'
 import datetime from './datetime'
+import drawer from './drawer'
 import dropdown from './dropdown'
 import icon from './icon'
 import image from './image'
@@ -24,10 +25,12 @@ export default {
   accordion,
   appbar,
   autocomplete,
+  bottomnavigation,
   button,
   checkbox,
   checkboxgroup,
   datetime,
+  drawer,
   dropdown,
   icon,
   image,
