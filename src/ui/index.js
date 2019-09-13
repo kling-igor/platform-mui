@@ -14,6 +14,7 @@ import input from './input'
 import label from './label'
 import list from './list'
 import radiogroup from './radiogroup'
+import sectionlist from './sectionlist'
 import swiper from './swiper'
 import tabs from './tabs'
 import toggle from './toggle'
@@ -39,6 +40,7 @@ export default {
   list,
   radiogroup,
   swiper,
+  sectionlist,
   tabs,
   toggle,
 
